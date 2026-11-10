@@ -1,0 +1,8 @@
+streamlit
+pandas
+textstat
+pyyaml
+plotly
+fpdf2
+python-docx
+pytest
