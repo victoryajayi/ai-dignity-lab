@@ -1,0 +1,22 @@
+id: ACC-LEN-001
+lens: access
+category: sentence and paragraph length
+severity: low
+match_type: metric
+metric: sentence_words
+threshold: 25
+applies_to: [all]
+why: >
+  Sentences over 25 words are harder to follow, especially for people
+  reading in a second language, people with cognitive disabilities, and
+  anyone reading on a phone.
+who_is_affected: Second-language readers, people with cognitive disabilities, busy readers
+suggestion: >
+  Split the sentence in two. Put the main point first.
+source_title: Federal Plain Language Guidelines
+source_url: https://www.plainlanguage.gov/guidelines/
+examples:
+  should_flag:
+    - Our team lead will help you learn the warehouse systems, plan your weekly schedule, set goals for your first ninety days, and connect with the people across the company who can support your growth.
+  should_not_flag:
+    - Please bring a photo ID to your first shift.

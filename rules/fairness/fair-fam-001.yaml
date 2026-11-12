@@ -1,0 +1,29 @@
+id: FAIR-FAM-001
+lens: fairness
+category: family and caregiving status
+severity: high
+match_type: phrase
+patterns:
+  - no childcare obligations
+  - no childcare responsibilities
+  - no family obligations
+  - no family commitments
+  - free of family obligations
+applies_to: [hiring]
+why: >
+  Screening for people without children or family duties excludes
+  caregivers, who are more often women, and can amount to sex
+  discrimination under federal and state law.
+who_is_affected: Parents and other caregivers, most often women
+suggestion: >
+  Describe the schedule itself, for example 'this role works rotating
+  shifts, including some weekends'.
+source_title: EEOC, Prohibited Employment Policies and Practices
+source_url: https://www.eeoc.gov/prohibited-employment-policies-practices
+examples:
+  should_flag:
+    - The ideal candidate has no childcare obligations.
+    - Applicants should be free of family obligations.
+  should_not_flag:
+    - This role works rotating shifts, including some weekends.
+    - We offer flexible scheduling for employees with caregiving responsibilities.

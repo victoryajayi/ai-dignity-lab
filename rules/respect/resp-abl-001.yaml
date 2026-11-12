@@ -1,0 +1,31 @@
+id: RESP-ABL-001
+lens: respect
+category: ableist metaphors
+severity: low
+match_type: regex
+patterns:
+  - '\b(?:fall|falls|fell|falling) on deaf ears\b'
+  - '\btone[- ]deaf\b'
+  - '\bblind to\b'
+  - '\bcrippled by\b'
+applies_to: [all]
+why: >
+  These metaphors use disability as shorthand for ignorance, carelessness,
+  or failure, which links disabled people with those traits.
+who_is_affected: Deaf, blind, and disabled people
+suggestion: >
+  Say what you mean directly, for example 'was ignored', 'out of touch',
+  'overlooks', or 'severely limited by'.
+limitations: >
+  'Blind to' can appear in a literal description. Rules never flag the
+  words 'blind' or 'deaf' on their own; check the sentence in context.
+source_title: NCDJ Disability Language Style Guide
+source_url: https://ncdj.org/style-guide/
+examples:
+  should_flag:
+    - Our concerns fell on deaf ears.
+    - The plan is blind to the needs of night staff.
+    - The team was crippled by budget cuts.
+  should_not_flag:
+    - We provide captioning for Deaf and hard of hearing guests.
+    - The library offers braille books for students who are blind.

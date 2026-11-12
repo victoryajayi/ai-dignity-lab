@@ -1,0 +1,30 @@
+id: FAIR-NAT-001
+lens: fairness
+category: national origin and language
+severity: high
+match_type: phrase
+patterns:
+  - native English speaker
+  - native English speakers
+  - native speaker of English
+  - no accent
+  - accent-free
+  - without an accent
+applies_to: [hiring]
+why: >
+  Requiring a native speaker or 'no accent' screens people out by where
+  they were born, not by whether they can do the job. A language
+  requirement should describe the actual skill the job needs.
+who_is_affected: Immigrants and people whose first language is not English
+suggestion: >
+  State the skill and level, for example 'fluent written and spoken
+  English for customer phone calls'.
+source_title: EEOC, National Origin Discrimination
+source_url: https://www.eeoc.gov/national-origin-discrimination
+examples:
+  should_flag:
+    - Native English speaker required.
+    - Candidates must have no accent on the phone.
+  should_not_flag:
+    - Fluent written and spoken English is required for this role.
+    - The role requires clear communication with customers in English.

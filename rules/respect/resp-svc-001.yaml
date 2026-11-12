@@ -1,0 +1,34 @@
+id: RESP-SVC-001
+lens: respect
+category: condescension in service replies
+severity: medium
+match_type: phrase
+patterns:
+  - calm down
+  - as I already explained
+  - as I already said
+  - as I said before
+  - as I have already explained
+  - as previously explained
+applies_to: [customer_service, communications, education]
+why: >
+  These phrases tell the reader they are overreacting or not paying
+  attention. They escalate frustration and make people less likely to
+  ask for help again.
+who_is_affected: Customers, parents, and anyone asking for help
+suggestion: >
+  Acknowledge and restate, for example 'Here is a quick summary of the
+  next steps' or 'I can see why this is frustrating. Here is what I can
+  do.'
+limitations: >
+  'Calm down' can describe a situation rather than a person ('sales
+  calm down after the holidays'). Check that it is aimed at the reader.
+source_title: Federal Plain Language Guidelines
+source_url: https://www.plainlanguage.gov/guidelines/
+examples:
+  should_flag:
+    - Please calm down so I can help you.
+    - As I already explained, refunds take ten business days.
+  should_not_flag:
+    - I can help you with your refund today.
+    - Here is a quick summary of the next steps.

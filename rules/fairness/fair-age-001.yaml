@@ -1,0 +1,31 @@
+id: FAIR-AGE-001
+lens: fairness
+category: age
+severity: high
+match_type: phrase
+patterns:
+  - digital native
+  - digital natives
+  - recent graduate
+  - recent graduates
+  - recent college graduate
+  - recent college graduates
+  - young and energetic
+applies_to: [hiring]
+why: >
+  These phrases signal a preference for younger candidates and can
+  deter or exclude qualified applicants aged 40 and over.
+who_is_affected: Workers 40 and over
+suggestion: >
+  Name the skill you need, for example 'comfortable learning new
+  software quickly' or 'open to all experience levels'.
+source_title: EEOC, Age Discrimination
+source_url: https://www.eeoc.gov/age-discrimination
+examples:
+  should_flag:
+    - We are looking for a digital native to join our marketing team.
+    - Recent graduates are encouraged to apply.
+    - We want someone young and energetic for the front desk.
+  should_not_flag:
+    - Our training covers the native file formats used by the design team.
+    - Applicants at every experience level are encouraged to apply.

@@ -1,0 +1,25 @@
+id: RESP-DIS-001
+lens: respect
+category: disability language
+severity: medium
+match_type: regex
+patterns:
+  - '\bwheelchair[- ]bound\b'
+  - '\bconfined to (?:a|her|his|their|the) wheelchair\b'
+applies_to: [all]
+why: >
+  A wheelchair gives people mobility and freedom. Calling someone
+  'bound' or 'confined' frames the person as trapped and the tool as
+  a problem.
+who_is_affected: Wheelchair users
+suggestion: >
+  Say the person 'uses a wheelchair'.
+source_title: NCDJ Disability Language Style Guide
+source_url: https://ncdj.org/style-guide/
+examples:
+  should_flag:
+    - The student is wheelchair-bound.
+    - He has been confined to a wheelchair since 2019.
+  should_not_flag:
+    - The student uses a wheelchair.
+    - The building is fully wheelchair accessible.

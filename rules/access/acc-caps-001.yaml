@@ -1,0 +1,27 @@
+id: ACC-CAPS-001
+lens: access
+category: visual-only formatting
+severity: low
+match_type: regex
+case_sensitive: true
+patterns:
+  - "\\b[A-Z][A-Z'-]+\\b(?:[\\s,;:.!?-]+\\b[A-Z][A-Z'-]+\\b){5,}"
+applies_to: [all]
+why: >
+  Long runs of capital letters are harder to read, especially for people
+  with dyslexia or low vision, and read as shouting. Some screen readers
+  may also read capitalized words letter by letter.
+who_is_affected: People with dyslexia, low vision, or who use screen readers
+suggestion: >
+  Use normal sentence case. For emphasis, use bold or a heading instead.
+limitations: >
+  Flags runs of six or more capitalized words. Short acronyms such as
+  NASA or FBI are not flagged on their own.
+source_title: Federal Plain Language Guidelines
+source_url: https://www.plainlanguage.gov/guidelines/
+examples:
+  should_flag:
+    - APPLY TODAY BEFORE THIS AMAZING OPPORTUNITY IS GONE!
+  should_not_flag:
+    - Join NASA and the FBI at the STEM career fair.
+    - WAREHOUSE TEAM LEAD WANTED

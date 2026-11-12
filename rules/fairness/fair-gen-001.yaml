@@ -1,0 +1,29 @@
+id: FAIR-GEN-001
+lens: fairness
+category: gender-coded language
+severity: medium
+match_type: phrase
+patterns:
+  - salesman
+  - salesmen
+  - chairman
+  - foreman
+  - repairman
+  - cameraman
+applies_to: [hiring, communications]
+why: >
+  Job titles that end in '-man' suggest the role is meant for men and
+  can discourage women and nonbinary people from applying.
+who_is_affected: Women and nonbinary applicants
+suggestion: >
+  Use a gender-neutral title, for example 'salesperson', 'chair',
+  'supervisor', 'repair technician', or 'camera operator'.
+source_title: Microsoft Writing Style Guide, Bias-free communication
+source_url: https://learn.microsoft.com/en-us/style-guide/bias-free-communication
+examples:
+  should_flag:
+    - We are hiring a salesman for our downtown store.
+    - You will report to the shift foreman.
+  should_not_flag:
+    - We are hiring a sales associate for our downtown store.
+    - You will report to the shift supervisor.
