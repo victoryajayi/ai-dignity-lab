@@ -30,7 +30,9 @@ VALID_CONTENT_TYPES = {
     "hiring", "decisions", "education", "customer_service",
     "communications", "all",
 }
-VALID_METRICS = {"sentence_words", "unexpanded_acronym"}
+VALID_METRICS = {"sentence_words", "unexpanded_acronym", "missing_headings", "required_missing"}
+# Metrics that compare a number to a limit, so they need 'threshold'.
+THRESHOLD_METRICS = {"sentence_words", "missing_headings", "required_missing"}
 
 
 class RuleError(ValueError):
@@ -106,8 +108,18 @@ def validate_rule(rule, file):
         if rule.get("metric") not in VALID_METRICS:
             raise RuleError(f"{name}: metric must be one of {sorted(VALID_METRICS)}")
         # Only number-based metrics need a threshold.
-        if rule["metric"] == "sentence_words" and not isinstance(rule.get("threshold"), (int, float)):
-            raise RuleError(f"{name}: a sentence_words rule needs a numeric 'threshold'")
+        if rule["metric"] in THRESHOLD_METRICS and not isinstance(rule.get("threshold"), (int, float)):
+            raise RuleError(f"{name}: a {rule['metric']} rule needs a numeric 'threshold'")
+        # required_missing looks for patterns, so it needs a list of them.
+        if rule["metric"] == "required_missing":
+            patterns = rule.get("patterns")
+            if not patterns or not isinstance(patterns, list):
+                raise RuleError(f"{name}: a required_missing rule needs a 'patterns' list")
+            for pattern in patterns:
+                try:
+                    re.compile(pattern)
+                except re.error as err:
+                    raise RuleError(f"{name}: bad regex {pattern!r}: {err}") from err
 
     # Quality bar (brief, section 6.5): at least one example of each kind.
     examples = rule["examples"] or {}

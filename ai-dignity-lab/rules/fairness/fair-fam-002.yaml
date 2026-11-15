@@ -1,0 +1,30 @@
+id: FAIR-FAM-002
+lens: fairness
+category: family and caregiving status
+severity: medium
+match_type: regex
+patterns:
+  - '\bavailable (?:24/7|24 ?hours a day|around the clock|at all times)\b'
+  - '\bwilling to work unlimited hours\b'
+  - '\bno personal (?:commitments|obligations)\b'
+applies_to: [hiring]
+why: >
+  Open-ended availability demands screen out caregivers, people with
+  disabilities who need predictable schedules, and religious observers,
+  without saying what the job actually needs.
+who_is_affected: Parents and caregivers, people with disabilities, and religious observers
+suggestion: >
+  State the real schedule, for example 'on call one weekend per month' or
+  'some evening shifts during inventory season'.
+limitations: >
+  Some roles are truly on call. The fix is to describe the on-call pattern,
+  not to remove the requirement.
+source_title: EEOC, Prohibited Employment Policies and Practices
+source_url: https://www.eeoc.gov/prohibited-employment-policies-practices
+examples:
+  should_flag:
+    - Candidates must be available 24/7.
+    - The ideal hire has no personal commitments.
+  should_not_flag:
+    - This role is on call one weekend per month.
+    - Our help line is open 24 hours a day.

@@ -1,0 +1,241 @@
+"""
+matchers.py: runs the rules against a piece of text and returns flags.
+
+How it works:
+1. The text is cleaned up (curly quotes become straight quotes).
+2. It is split into sentences, so every flag can show its sentence.
+3. Each rule is turned into one regular expression (or a metric check)
+   and run on every sentence.
+4. Each match becomes a Flag holding everything a Rule Card needs.
+"""
+
+import re
+from dataclasses import dataclass
+
+# Sort order for the output: high first, then medium, then low.
+SEVERITY_ORDER = {"high": 0, "medium": 1, "low": 2}
+
+# A sentence ends at . ! or ? followed by a space, or at a line break.
+# Line breaks count because job postings often use bullet lines with no period.
+# The (?<!...) parts stop a split after common abbreviations, so
+# "U.S. citizens", "e.g. a bill", and "Dr. Lee" stay in one sentence.
+SENTENCE_SPLIT = re.compile(
+    r"(?<!\b[A-Za-z]\.[A-Za-z]\.)"   # U.S.  e.g.  i.e.
+    r"(?<!\bMr\.)(?<!\bMs\.)(?<!\bDr\.)(?<!\bMrs\.)(?<!\bSt\.)"
+    r"(?<=[.!?])\s+"
+    r"|\n+"
+)
+
+# A "word" for counting: letters/digits, allowing ' and - inside (don't, full-time).
+WORD = re.compile(r"[A-Za-z0-9]+(?:['-][A-Za-z0-9]+)*")
+
+
+@dataclass
+class Flag:
+    """One problem found in the text: everything a Rule Card shows."""
+    rule_id: str
+    lens: str
+    category: str
+    severity: str
+    matched_text: str
+    sentence: str
+    why: str
+    who_is_affected: str
+    suggestion: str
+    source_title: str
+    source_url: str
+    limitations: str = ""
+
+
+def normalize(text):
+    """Swap curly quotes for straight ones so patterns match either style."""
+    return (
+        text.replace("\u2019", "'").replace("\u2018", "'")
+        .replace("\u201c", '"').replace("\u201d", '"')
+    )
+
+
+def split_sentences(text):
+    """Return the text as a list of non-empty sentences."""
+    parts = SENTENCE_SPLIT.split(normalize(text))
+    return [part.strip() for part in parts if part.strip()]
+
+
+def phrase_to_regex(phrase):
+    r"""
+    Turn a plain phrase into a whole-word regex.
+    'digital native' -> \bdigital\s+native\b
+    \b means "word boundary", so 'native' will not match inside 'nativeness'.
+    \s+ lets the words be separated by any spaces or a line break.
+    re.escape makes characters like - or . count literally.
+    """
+    words = [re.escape(word) for word in phrase.split()]
+    return r"\b" + r"\s+".join(words) + r"\b"
+
+
+def compile_rule(rule):
+    """Combine all of a rule's patterns into one regex, longest first."""
+    if rule["match_type"] == "phrase":
+        pieces = [phrase_to_regex(p) for p in rule["patterns"]]
+    else:  # regex rules are written as regex already
+        pieces = list(rule["patterns"])
+
+    # Longest first, so 'no childcare obligations' wins over a shorter overlap.
+    pieces.sort(key=len, reverse=True)
+    combined = "|".join(f"(?:{piece})" for piece in pieces)
+
+    # Matching ignores case unless the rule says case matters (ALL-CAPS rule).
+    flags = 0 if rule.get("case_sensitive") else re.IGNORECASE
+    return re.compile(combined, flags)
+
+
+def rule_applies(rule, content_type):
+    """True if the rule should run on this content type."""
+    if content_type is None:  # no type given: run every rule
+        return True
+    applies_to = rule["applies_to"]
+    return "all" in applies_to or content_type in applies_to
+
+
+def make_flag(rule, matched_text, sentence):
+    """Build a Flag from a rule and the text it matched."""
+    return Flag(
+        rule_id=rule["id"],
+        lens=rule["lens"],
+        category=rule["category"],
+        severity=rule["severity"],
+        matched_text=matched_text,
+        sentence=sentence,
+        why=" ".join(rule["why"].split()),          # tidy YAML line breaks
+        who_is_affected=rule["who_is_affected"],
+        suggestion=" ".join(rule["suggestion"].split()),
+        source_title=rule["source_title"],
+        source_url=rule["source_url"],
+        limitations=" ".join(rule.get("limitations", "").split()),
+    )
+
+
+def check_metric(rule, sentence):
+    """Run a metric rule on one sentence. Return a Flag or None."""
+    if rule["metric"] == "sentence_words":
+        word_count = len(WORD.findall(sentence))
+        if word_count > rule["threshold"]:
+            return make_flag(rule, f"{word_count} words", sentence)
+    return None
+
+
+# An acronym: 2 to 6 capital letters, optionally a plural 's' (IEPs).
+ACRONYM = re.compile(r"\b([A-Z]{2,6})s?\b")
+
+
+def is_mostly_caps(sentence):
+    """True for ALL-CAPS headings and shouting, which the caps rule handles."""
+    words = WORD.findall(sentence)
+    caps = [w for w in words if w.isupper() and len(w) > 1]
+    return bool(words) and len(caps) / len(words) >= 0.5
+
+
+def check_acronyms(rule, text, sentences):
+    """
+    Whole-text check: flag the first use of each acronym that is never
+    explained anywhere. 'Explained' means it appears in brackets, like
+    'Individualized Education Program (IEP)', or right before one, like
+    'IEP (Individualized Education Program)'.
+    """
+    text = normalize(text)
+    ignore = set(rule.get("ignore", []))
+    flags = []
+    already_flagged = set()
+
+    for sentence in sentences:
+        if is_mostly_caps(sentence):
+            continue
+        for match in ACRONYM.finditer(sentence):
+            acronym = match.group(1)
+            if acronym in ignore or acronym in already_flagged:
+                continue
+            explained = (
+                re.search(r"\(\s*" + acronym + r"s?\s*\)", text)
+                or re.search(r"\b" + acronym + r"s?\s*\(", text)
+            )
+            if not explained:
+                flags.append(make_flag(rule, match.group(0), sentence))
+                already_flagged.add(acronym)
+    return flags
+
+
+def is_heading(line):
+    """
+    A line counts as a heading if it starts with # (Markdown), or is short
+    (8 words or fewer) and does not end like a sentence.
+    """
+    line = line.strip()
+    if not line:
+        return False
+    if line.startswith("#"):
+        return True
+    words = WORD.findall(line)
+    return 0 < len(words) <= 8 and not line.endswith((".", "!", "?", ",", ";"))
+
+
+def check_missing_headings(rule, text, sentences):
+    """Whole-text check: a long text with no headings at all."""
+    word_count = len(WORD.findall(text))
+    if word_count <= rule["threshold"]:
+        return []
+    if any(is_heading(line) for line in normalize(text).splitlines()):
+        return []
+    return [make_flag(rule, f"{word_count} words, no headings", sentences[0])]
+
+
+def check_required_missing(rule, text, sentences):
+    """
+    Whole-text check: something the text should contain is missing, for
+    example an accommodation statement in a job posting. Short texts
+    (under the threshold) are skipped so a single line is not flagged.
+    """
+    if len(WORD.findall(text)) < rule["threshold"]:
+        return []
+    for pattern in rule["patterns"]:
+        if re.search(pattern, normalize(text), re.IGNORECASE):
+            return []
+    return [make_flag(rule, "statement not found", sentences[0])]
+
+
+# Whole-text metrics: each name points to the function that runs it.
+DOCUMENT_METRICS = {
+    "unexpanded_acronym": check_acronyms,
+    "missing_headings": check_missing_headings,
+    "required_missing": check_required_missing,
+}
+
+
+def check_text(text, rules, content_type=None):
+    """Run every applicable rule on the text. Return flags, most severe first."""
+    flags = []
+    sentences = split_sentences(text)
+
+    for rule in rules:
+        if not rule_applies(rule, content_type):
+            continue
+
+        if rule["match_type"] == "metric" and rule["metric"] in DOCUMENT_METRICS:
+            check = DOCUMENT_METRICS[rule["metric"]]
+            flags.extend(check(rule, text, sentences))
+            continue
+
+        if rule["match_type"] == "metric":
+            for sentence in sentences:
+                flag = check_metric(rule, sentence)
+                if flag:
+                    flags.append(flag)
+            continue
+
+        pattern = compile_rule(rule)
+        for sentence in sentences:
+            for match in pattern.finditer(sentence):
+                flags.append(make_flag(rule, match.group(0), sentence))
+
+    # Stable sort: severity first; ties keep the order they were found in.
+    flags.sort(key=lambda flag: SEVERITY_ORDER[flag.severity])
+    return flags

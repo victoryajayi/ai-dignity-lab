@@ -1,0 +1,29 @@
+id: ACC-STRUC-001
+lens: access
+category: structure
+severity: low
+match_type: metric
+metric: missing_headings
+threshold: 300
+applies_to: [all]
+why: >
+  A long text with no headings is a wall of words. Readers cannot skim for
+  the part they need, and screen reader users cannot jump between sections.
+who_is_affected: Screen reader users, people with cognitive disabilities, and busy readers
+suggestion: >
+  Break the text into sections with short headings, for example 'What to
+  bring', 'When to arrive', and 'Who to contact'.
+limitations: >
+  Treats any short line without end punctuation as a heading. Text pasted
+  without line breaks may be flagged even if the original had headings.
+source_title: Federal Plain Language Guidelines
+source_url: https://www.plainlanguage.gov/guidelines/
+examples:
+  should_flag:
+    - |
+      Thank you for joining our family literacy program this fall. Each week your child will bring home a short book and a reading log. Please read with your child for at least fifteen minutes each night and sign the log when you finish. Thank you for joining our family literacy program this fall. Each week your child will bring home a short book and a reading log. Please read with your child for at least fifteen minutes each night and sign the log when you finish. Thank you for joining our family literacy program this fall. Each week your child will bring home a short book and a reading log. Please read with your child for at least fifteen minutes each night and sign the log when you finish. Thank you for joining our family literacy program this fall. Each week your child will bring home a short book and a reading log. Please read with your child for at least fifteen minutes each night and sign the log when you finish. Thank you for joining our family literacy program this fall. Each week your child will bring home a short book and a reading log. Please read with your child for at least fifteen minutes each night and sign the log when you finish. Thank you for joining our family literacy program this fall. Each week your child will bring home a short book and a reading log. Please read with your child for at least fifteen minutes each night and sign the log when you finish. Thank you for joining our family literacy program this fall. Each week your child will bring home a short book and a reading log. Please read with your child for at least fifteen minutes each night and sign the log when you finish. Thank you for joining our family literacy program this fall. Each week your child will bring home a short book and a reading log. Please read with your child for at least fifteen minutes each night and sign the log when you finish.
+  should_not_flag:
+    - |
+      Reading at home
+      Thank you for joining our family literacy program this fall. Each week your child will bring home a short book and a reading log. Please read with your child for at least fifteen minutes each night and sign the log when you finish. Thank you for joining our family literacy program this fall. Each week your child will bring home a short book and a reading log. Please read with your child for at least fifteen minutes each night and sign the log when you finish. Thank you for joining our family literacy program this fall. Each week your child will bring home a short book and a reading log. Please read with your child for at least fifteen minutes each night and sign the log when you finish. Thank you for joining our family literacy program this fall. Each week your child will bring home a short book and a reading log. Please read with your child for at least fifteen minutes each night and sign the log when you finish. Thank you for joining our family literacy program this fall. Each week your child will bring home a short book and a reading log. Please read with your child for at least fifteen minutes each night and sign the log when you finish. Thank you for joining our family literacy program this fall. Each week your child will bring home a short book and a reading log. Please read with your child for at least fifteen minutes each night and sign the log when you finish. Thank you for joining our family literacy program this fall. Each week your child will bring home a short book and a reading log. Please read with your child for at least fifteen minutes each night and sign the log when you finish. Thank you for joining our family literacy program this fall. Each week your child will bring home a short book and a reading log. Please read with your child for at least fifteen minutes each night and sign the log when you finish.
+    - Please read with your child for fifteen minutes each night.

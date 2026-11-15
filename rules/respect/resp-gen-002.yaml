@@ -1,0 +1,26 @@
+id: RESP-GEN-002
+lens: respect
+category: gender and family
+severity: low
+match_type: regex
+patterns:
+  - '\bdear sirs?\b(?! or madam)'
+  - '\bdear sir or madam\b'
+  - '\bladies and gentlemen\b'
+applies_to: [all]
+why: >
+  Gendered greetings assume the reader's gender and leave out nonbinary
+  people. 'Dear Sir' also assumes the reader is a man.
+who_is_affected: Women, nonbinary people, and anyone misgendered by a default greeting
+suggestion: >
+  Use the person's name, a role ('Dear Hiring Team'), or a neutral greeting
+  such as 'Hello' or 'Welcome, everyone'.
+source_title: Microsoft Writing Style Guide, Bias-free communication
+source_url: https://learn.microsoft.com/en-us/style-guide/bias-free-communication
+examples:
+  should_flag:
+    - Dear Sir, thank you for your order.
+    - Ladies and gentlemen, the event begins at noon.
+  should_not_flag:
+    - Dear Hiring Team, thank you for your time.
+    - Welcome, everyone. The event begins at noon.

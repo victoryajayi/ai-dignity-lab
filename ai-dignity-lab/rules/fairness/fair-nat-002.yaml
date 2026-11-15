@@ -1,0 +1,31 @@
+id: FAIR-NAT-002
+lens: fairness
+category: national origin and language
+severity: medium
+match_type: regex
+patterns:
+  - '\bmust be (?:a )?(?:U\.?S\.? |American )?citizens?\b'
+  - '\b(?:U\.?S\.? )?citizens only\b'
+  - '\bmust be American\b'
+  - '\bgreen card holders only\b'
+applies_to: [hiring]
+why: >
+  Most jobs may require that a person is authorized to work in the United
+  States, but not that they are a citizen. Citizenship-only rules can
+  unlawfully exclude permanent residents, refugees, and asylees.
+who_is_affected: Permanent residents, refugees, asylees, and other work-authorized immigrants
+suggestion: >
+  Say 'Must be authorized to work in the United States', unless a law,
+  government contract, or security clearance requires citizenship.
+limitations: >
+  Some roles legally require citizenship, such as many federal jobs and
+  positions needing a security clearance. A person should check the role.
+source_title: U.S. Department of Justice, Immigrant and Employee Rights Section
+source_url: https://www.justice.gov/crt/immigrant-and-employee-rights-section
+examples:
+  should_flag:
+    - Applicants must be U.S. citizens.
+    - US citizens only, please.
+  should_not_flag:
+    - Applicants must be authorized to work in the United States.
+    - We are proud to serve citizens across Essex County.

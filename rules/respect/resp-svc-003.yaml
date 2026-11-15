@@ -1,0 +1,28 @@
+id: RESP-SVC-003
+lens: respect
+category: condescension in service replies
+severity: low
+match_type: regex
+patterns:
+  - '\bI understand (?:your|the) frustration,? but\b'
+  - '\bsorry (?:if|that) you feel\b'
+  - '\bsorry you feel that way\b'
+  - '\bsorry for any inconvenience this may have caused\b'
+applies_to: [customer_service, communications, education]
+why: >
+  These are non-apologies. 'But' cancels the empathy before it, and
+  'sorry you feel' puts the problem on the reader's feelings instead of
+  what happened.
+who_is_affected: Customers and parents with a real complaint
+suggestion: >
+  Name what went wrong and what you will do, for example 'Your order
+  arrived late, and I have refunded the shipping fee.'
+source_title: Federal Plain Language Guidelines
+source_url: https://www.plainlanguage.gov/guidelines/
+examples:
+  should_flag:
+    - I understand your frustration, but our policy is firm.
+    - I'm sorry you feel that way.
+  should_not_flag:
+    - Your order arrived late, and I have refunded the shipping fee.
+    - I'm sorry your order arrived late.

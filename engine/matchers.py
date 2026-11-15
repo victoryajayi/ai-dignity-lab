@@ -17,7 +17,14 @@ SEVERITY_ORDER = {"high": 0, "medium": 1, "low": 2}
 
 # A sentence ends at . ! or ? followed by a space, or at a line break.
 # Line breaks count because job postings often use bullet lines with no period.
-SENTENCE_SPLIT = re.compile(r"(?<=[.!?])\s+|\n+")
+# The (?<!...) parts stop a split after common abbreviations, so
+# "U.S. citizens", "e.g. a bill", and "Dr. Lee" stay in one sentence.
+SENTENCE_SPLIT = re.compile(
+    r"(?<!\b[A-Za-z]\.[A-Za-z]\.)"   # U.S.  e.g.  i.e.
+    r"(?<!\bMr\.)(?<!\bMs\.)(?<!\bDr\.)(?<!\bMrs\.)(?<!\bSt\.)"
+    r"(?<=[.!?])\s+"
+    r"|\n+"
+)
 
 # A "word" for counting: letters/digits, allowing ' and - inside (don't, full-time).
 WORD = re.compile(r"[A-Za-z0-9]+(?:['-][A-Za-z0-9]+)*")
@@ -157,6 +164,52 @@ def check_acronyms(rule, text, sentences):
     return flags
 
 
+def is_heading(line):
+    """
+    A line counts as a heading if it starts with # (Markdown), or is short
+    (8 words or fewer) and does not end like a sentence.
+    """
+    line = line.strip()
+    if not line:
+        return False
+    if line.startswith("#"):
+        return True
+    words = WORD.findall(line)
+    return 0 < len(words) <= 8 and not line.endswith((".", "!", "?", ",", ";"))
+
+
+def check_missing_headings(rule, text, sentences):
+    """Whole-text check: a long text with no headings at all."""
+    word_count = len(WORD.findall(text))
+    if word_count <= rule["threshold"]:
+        return []
+    if any(is_heading(line) for line in normalize(text).splitlines()):
+        return []
+    return [make_flag(rule, f"{word_count} words, no headings", sentences[0])]
+
+
+def check_required_missing(rule, text, sentences):
+    """
+    Whole-text check: something the text should contain is missing, for
+    example an accommodation statement in a job posting. Short texts
+    (under the threshold) are skipped so a single line is not flagged.
+    """
+    if len(WORD.findall(text)) < rule["threshold"]:
+        return []
+    for pattern in rule["patterns"]:
+        if re.search(pattern, normalize(text), re.IGNORECASE):
+            return []
+    return [make_flag(rule, "statement not found", sentences[0])]
+
+
+# Whole-text metrics: each name points to the function that runs it.
+DOCUMENT_METRICS = {
+    "unexpanded_acronym": check_acronyms,
+    "missing_headings": check_missing_headings,
+    "required_missing": check_required_missing,
+}
+
+
 def check_text(text, rules, content_type=None):
     """Run every applicable rule on the text. Return flags, most severe first."""
     flags = []
@@ -166,8 +219,9 @@ def check_text(text, rules, content_type=None):
         if not rule_applies(rule, content_type):
             continue
 
-        if rule["match_type"] == "metric" and rule["metric"] == "unexpanded_acronym":
-            flags.extend(check_acronyms(rule, text, sentences))
+        if rule["match_type"] == "metric" and rule["metric"] in DOCUMENT_METRICS:
+            check = DOCUMENT_METRICS[rule["metric"]]
+            flags.extend(check(rule, text, sentences))
             continue
 
         if rule["match_type"] == "metric":

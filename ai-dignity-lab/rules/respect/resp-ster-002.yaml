@@ -1,0 +1,28 @@
+id: RESP-STER-002
+lens: respect
+category: stereotyped generalizations
+severity: high
+match_type: regex
+patterns:
+  - '\b(?:asians?|asian people|black people|white people|hispanics|latinos|latinas|immigrants|mexicans|africans|nigerians|indians|muslims|jews|arabs|chinese people) (?:are|tend to be) (?:naturally|always|just|good at|bad at|better at|worse at|lazy|loud|aggressive)\b'
+applies_to: [all]
+why: >
+  Claims about what a whole racial, ethnic, national, or religious group
+  'naturally' is or does present a stereotype as fact, whether the trait
+  sounds positive or negative.
+who_is_affected: Members of the group being generalized about
+suggestion: >
+  Describe the individual, or cite data about a specific population with
+  its source.
+limitations: >
+  Covers common group names only, and only where they open the claim.
+  Indirect stereotypes need human review.
+source_title: APA Inclusive Language Guide
+source_url: https://www.apa.org/about/apa/equity-diversity-inclusion/language-guidelines
+examples:
+  should_flag:
+    - Asians are naturally good at math.
+    - Immigrants are always willing to work longer hours.
+  should_not_flag:
+    - Immigrants are an important part of our local workforce.
+    - Many of our students who speak Spanish at home are now in the honors program.

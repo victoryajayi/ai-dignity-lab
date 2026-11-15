@@ -1,0 +1,33 @@
+id: RESP-SVC-002
+lens: respect
+category: condescension in service replies
+severity: medium
+match_type: phrase
+patterns:
+  - you should have
+  - you failed to
+  - per my last email
+  - as stated previously
+  - you need to understand
+  - obviously you
+  - as you should know
+applies_to: [customer_service, communications, education]
+why: >
+  These phrases put blame on the reader or imply they were careless. They
+  shut down the conversation instead of solving the problem.
+who_is_affected: Customers, parents, and staff asking for help
+suggestion: >
+  Focus on the next step, for example 'To finish your return, please
+  attach the receipt' or 'Here is the information again for easy reference.'
+limitations: >
+  'You should have' can be friendly, as in 'you should have received an
+  email'. Check that it blames the reader.
+source_title: Federal Plain Language Guidelines
+source_url: https://www.plainlanguage.gov/guidelines/
+examples:
+  should_flag:
+    - You failed to attach the receipt.
+    - Per my last email, the form is due Friday.
+  should_not_flag:
+    - To finish your return, please attach the receipt.
+    - Here is the due date again for easy reference.

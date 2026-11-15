@@ -1,0 +1,40 @@
+id: FAIR-DIS-002
+lens: fairness
+category: disability and essential functions
+severity: medium
+match_type: metric
+metric: required_missing
+threshold: 60
+patterns:
+  - 'accommodat'
+applies_to: [hiring]
+why: >
+  A job posting with no accommodation statement leaves disabled applicants
+  guessing whether they can ask for help applying or doing the job.
+who_is_affected: Applicants with disabilities
+suggestion: >
+  Add a line such as 'We provide reasonable accommodations to qualified
+  applicants. To request one, contact [name] at [email or phone].'
+limitations: >
+  Checks job postings of 60 words or more for any mention of
+  accommodation. It cannot tell whether the statement is clear or useful.
+source_title: EEOC, Disability Discrimination
+source_url: https://www.eeoc.gov/disability-discrimination
+examples:
+  should_flag:
+    - >
+      We are hiring a part-time cashier for our hardware store. You will
+      greet customers, run the register, restock shelves, and answer
+      questions about tools and supplies. Shifts are four to six hours,
+      including some Saturdays. Pay starts at seventeen dollars per hour,
+      with a raise after ninety days. No experience is needed and we train
+      on the job. Apply in person at the front counter or send us an email.
+  should_not_flag:
+    - >
+      We are hiring a part-time cashier for our hardware store. You will
+      greet customers, run the register, restock shelves, and answer
+      questions about tools and supplies. Shifts are four to six hours,
+      including some Saturdays. Pay starts at seventeen dollars per hour.
+      We provide reasonable accommodations to qualified applicants. To
+      request one, email our store manager or call the front counter.
+    - We are hiring a part-time cashier.

@@ -1,0 +1,29 @@
+id: RESP-DIS-003
+lens: respect
+category: disability language
+severity: medium
+match_type: regex
+patterns:
+  - '\b(?:normal|regular) (?:students|kids|children|people|classmates|peers)\b'
+  - '\b(?:high|low)[- ]functioning\b'
+applies_to: [all]
+why: >
+  Calling non-disabled people 'normal' implies disabled people are not.
+  Functioning labels reduce a person to one judgment and hide their real
+  support needs.
+who_is_affected: Disabled students and adults, including autistic people
+suggestion: >
+  Say 'students without disabilities' or 'general education students',
+  and describe the specific support a person needs.
+limitations: >
+  'Regular' can describe schedules or classes ('regular classes'). The rule
+  only matches it before a word for people.
+source_title: NCDJ Disability Language Style Guide
+source_url: https://ncdj.org/style-guide/
+examples:
+  should_flag:
+    - He sits with the normal kids at lunch.
+    - She is high-functioning, so she needs less help.
+  should_not_flag:
+    - He sits with his classmates at lunch.
+    - Students attend their regular classes after the assembly.

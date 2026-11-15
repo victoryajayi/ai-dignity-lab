@@ -1,0 +1,32 @@
+id: FAIR-AGE-002
+lens: fairness
+category: age
+severity: high
+match_type: regex
+patterns:
+  - '\boverqualified\b'
+  - '\byoung (?:team|professionals?|talent|blood)\b'
+  - '\bfresh (?:grads?|graduates?)\b'
+  - '\bno more than \d+ years (?:of )?experience\b'
+applies_to: [hiring]
+why: >
+  Phrases about young talent, fresh graduates, maximum experience, or
+  being 'overqualified' are common stand-ins for age and can screen out
+  applicants 40 and over.
+who_is_affected: Workers 40 and over
+suggestion: >
+  Describe the role and pay level directly, for example 'entry-level role,
+  training provided', and judge experience against the duties.
+limitations: >
+  'Young' can describe a program's clients, for example 'young readers'.
+  The rule only matches young plus team, talent, professionals, or blood.
+source_title: EEOC, Age Discrimination
+source_url: https://www.eeoc.gov/age-discrimination
+examples:
+  should_flag:
+    - Join our young team of designers.
+    - Fresh grads are welcome to apply.
+    - Candidates with no more than 5 years experience preferred.
+  should_not_flag:
+    - This is an entry-level role and we provide training.
+    - Our library hosts a book club for young readers.
