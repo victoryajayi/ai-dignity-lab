@@ -117,6 +117,46 @@ def check_metric(rule, sentence):
     return None
 
 
+# An acronym: 2 to 6 capital letters, optionally a plural 's' (IEPs).
+ACRONYM = re.compile(r"\b([A-Z]{2,6})s?\b")
+
+
+def is_mostly_caps(sentence):
+    """True for ALL-CAPS headings and shouting, which the caps rule handles."""
+    words = WORD.findall(sentence)
+    caps = [w for w in words if w.isupper() and len(w) > 1]
+    return bool(words) and len(caps) / len(words) >= 0.5
+
+
+def check_acronyms(rule, text, sentences):
+    """
+    Whole-text check: flag the first use of each acronym that is never
+    explained anywhere. 'Explained' means it appears in brackets, like
+    'Individualized Education Program (IEP)', or right before one, like
+    'IEP (Individualized Education Program)'.
+    """
+    text = normalize(text)
+    ignore = set(rule.get("ignore", []))
+    flags = []
+    already_flagged = set()
+
+    for sentence in sentences:
+        if is_mostly_caps(sentence):
+            continue
+        for match in ACRONYM.finditer(sentence):
+            acronym = match.group(1)
+            if acronym in ignore or acronym in already_flagged:
+                continue
+            explained = (
+                re.search(r"\(\s*" + acronym + r"s?\s*\)", text)
+                or re.search(r"\b" + acronym + r"s?\s*\(", text)
+            )
+            if not explained:
+                flags.append(make_flag(rule, match.group(0), sentence))
+                already_flagged.add(acronym)
+    return flags
+
+
 def check_text(text, rules, content_type=None):
     """Run every applicable rule on the text. Return flags, most severe first."""
     flags = []
@@ -124,6 +164,10 @@ def check_text(text, rules, content_type=None):
 
     for rule in rules:
         if not rule_applies(rule, content_type):
+            continue
+
+        if rule["match_type"] == "metric" and rule["metric"] == "unexpanded_acronym":
+            flags.extend(check_acronyms(rule, text, sentences))
             continue
 
         if rule["match_type"] == "metric":

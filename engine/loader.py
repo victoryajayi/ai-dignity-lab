@@ -30,7 +30,7 @@ VALID_CONTENT_TYPES = {
     "hiring", "decisions", "education", "customer_service",
     "communications", "all",
 }
-VALID_METRICS = {"sentence_words"}
+VALID_METRICS = {"sentence_words", "unexpanded_acronym"}
 
 
 class RuleError(ValueError):
@@ -105,8 +105,9 @@ def validate_rule(rule, file):
     if rule["match_type"] == "metric":
         if rule.get("metric") not in VALID_METRICS:
             raise RuleError(f"{name}: metric must be one of {sorted(VALID_METRICS)}")
-        if not isinstance(rule.get("threshold"), (int, float)):
-            raise RuleError(f"{name}: a metric rule needs a numeric 'threshold'")
+        # Only number-based metrics need a threshold.
+        if rule["metric"] == "sentence_words" and not isinstance(rule.get("threshold"), (int, float)):
+            raise RuleError(f"{name}: a sentence_words rule needs a numeric 'threshold'")
 
     # Quality bar (brief, section 6.5): at least one example of each kind.
     examples = rule["examples"] or {}

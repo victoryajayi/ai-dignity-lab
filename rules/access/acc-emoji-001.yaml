@@ -1,0 +1,26 @@
+id: ACC-EMOJI-001
+lens: access
+category: visual-only formatting
+severity: low
+match_type: regex
+patterns:
+  - '^[\U0001F300-\U0001FAFF☀-➿⭐⬆⬇⤴⤵️‍\s]+[.!]?$'
+applies_to: [all]
+why: >
+  A line made only of emoji carries its meaning through a picture. Screen
+  readers read the emoji name, which may not match what you meant, and
+  meanings differ across cultures.
+who_is_affected: Screen reader users, older readers, and readers from other cultures
+suggestion: >
+  Add words that say the message, for example 'Approved' instead of a check mark alone.
+limitations: >
+  Only flags lines or sentences that are emoji alone. Emoji next to words are fine.
+source_title: Federal Plain Language Guidelines
+source_url: https://www.plainlanguage.gov/guidelines/
+examples:
+  should_flag:
+    - "✅✅"
+    - "\U0001F44D"
+  should_not_flag:
+    - "Your order has shipped \U0001F44D"
+    - Approved.

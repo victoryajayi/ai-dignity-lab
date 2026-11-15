@@ -1,0 +1,27 @@
+id: ACC-ACR-001
+lens: access
+category: jargon and acronyms
+severity: low
+match_type: metric
+metric: unexpanded_acronym
+ignore: [US, USA, OK, TV, AM, PM, ID, FAQ, PDF, URL, CEO, ASAP]
+applies_to: [all]
+why: >
+  An acronym the reader does not know blocks the whole sentence. Parents,
+  customers, and new staff rarely know insider terms like IEP, PTO, or SLA.
+who_is_affected: Parents, customers, second-language readers, and people new to the organization
+suggestion: >
+  Spell it out the first time, with the acronym in brackets, for example
+  'Individualized Education Program (IEP)'.
+limitations: >
+  Flags the first unexplained use of each acronym once. Well-known terms
+  are skipped through the rule's ignore list, which an organization can edit.
+source_title: WCAG 2.2, Success Criterion 3.1.4 Abbreviations
+source_url: https://www.w3.org/WAI/WCAG22/Understanding/abbreviations.html
+examples:
+  should_flag:
+    - Please bring your child's IEP to the meeting.
+    - New hires earn PTO after 90 days.
+  should_not_flag:
+    - Please bring your child's Individualized Education Program (IEP) to the meeting.
+    - Please bring a photo ID and arrive by 9 AM.

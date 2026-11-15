@@ -1,0 +1,25 @@
+id: ACC-VIS-001
+lens: access
+category: visual-only formatting
+severity: low
+match_type: regex
+patterns:
+  - '\bas shown (?:below|above|in the (?:image|picture|photo|diagram|screenshot|chart))\b'
+  - '\bsee the (?:image|picture|photo|diagram|screenshot|chart) (?:below|above)\b'
+applies_to: [all]
+why: >
+  Pointing to an image without describing it leaves out anyone who cannot
+  see it, including screen reader users and people on slow connections.
+who_is_affected: People who are blind or have low vision; screen reader users
+suggestion: >
+  Say what the image shows in the text, for example 'The chart shows sign-ups
+  doubled in March', and give the image alt text.
+source_title: WCAG 2.2, Success Criterion 1.1.1 Non-text Content
+source_url: https://www.w3.org/WAI/WCAG22/Understanding/non-text-content.html
+examples:
+  should_flag:
+    - Fill in the form as shown below.
+    - See the screenshot above for the steps.
+  should_not_flag:
+    - Fill in your name, email, and phone number on the form.
+    - The chart shows that sign-ups doubled in March.

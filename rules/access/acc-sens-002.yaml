@@ -1,0 +1,26 @@
+id: ACC-SENS-002
+lens: access
+category: link and instruction clarity
+severity: low
+match_type: regex
+patterns:
+  - '\b(?:in|on|at) the (?:top|bottom|upper|lower) (?:left|right)(?: corner)?\b'
+  - '\bthe (?:button|link|icon|menu|box) (?:on|to) the (?:left|right)\b'
+applies_to: [all]
+why: >
+  Directions based only on position mean nothing to a screen reader user,
+  and positions shift on phones and zoomed screens.
+who_is_affected: Screen reader users and people using magnification or phones
+suggestion: >
+  Add the control's name, for example 'Select Menu (top left of the page)'.
+limitations: >
+  Position is fine as extra help when the control's name is also given.
+source_title: WCAG 2.2, Success Criterion 1.3.3 Sensory Characteristics
+source_url: https://www.w3.org/WAI/WCAG22/Understanding/sensory-characteristics.html
+examples:
+  should_flag:
+    - Use the icon in the top right corner to log in.
+    - Click the button on the left to continue.
+  should_not_flag:
+    - Select Log In to sign in to your account.
+    - Turn left at the front desk to reach the library.

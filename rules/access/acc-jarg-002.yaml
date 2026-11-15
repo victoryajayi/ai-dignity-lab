@@ -1,0 +1,36 @@
+id: ACC-JARG-002
+lens: access
+category: jargon and acronyms
+severity: low
+match_type: phrase
+patterns:
+  - pursuant to
+  - heretofore
+  - hereinafter
+  - aforementioned
+  - notwithstanding
+  - in lieu of
+  - in accordance with
+  - prior to
+  - subsequent to
+applies_to: [all]
+why: >
+  Legal and bureaucratic phrases slow readers down and hide the point.
+  Plain words do the same job.
+who_is_affected: Parents, customers, applicants, and second-language readers
+suggestion: >
+  Use plain words: 'under' for pursuant to, 'instead of' for in lieu of,
+  'before' for prior to, 'after' for subsequent to, 'following' or 'under'
+  for in accordance with.
+limitations: >
+  Contracts and legal notices may need exact terms. Check whether a lawyer
+  requires the wording.
+source_title: Federal Plain Language Guidelines
+source_url: https://www.plainlanguage.gov/guidelines/
+examples:
+  should_flag:
+    - Pursuant to district policy, absences must be reported.
+    - Please submit the form prior to the deadline.
+  should_not_flag:
+    - Under district policy, absences must be reported.
+    - Please submit the form before the deadline.

@@ -1,0 +1,29 @@
+id: ACC-JARG-001
+lens: access
+category: jargon and acronyms
+severity: low
+match_type: regex
+patterns:
+  - '\be\.g\.'
+  - '\bi\.e\.'
+  - '\bvis-[aà]-vis\b'
+  - '\bper se\b'
+  - '\binter alia\b'
+  - '\bad hoc\b'
+applies_to: [all]
+why: >
+  Latin abbreviations and phrases are often misread, even by fluent
+  readers, and screen readers may read them letter by letter.
+who_is_affected: Second-language readers, screen reader users, and readers at all levels
+suggestion: >
+  Use 'for example' for e.g., 'that is' for i.e., 'compared with' for
+  vis-à-vis, and 'as needed' for ad hoc.
+source_title: Federal Plain Language Guidelines
+source_url: https://www.plainlanguage.gov/guidelines/
+examples:
+  should_flag:
+    - Bring a document, e.g. a utility bill.
+    - The form is due on Friday, i.e. in two days.
+  should_not_flag:
+    - Bring a document, for example a utility bill.
+    - We meet as needed to review requests.

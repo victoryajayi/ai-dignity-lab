@@ -1,0 +1,31 @@
+id: ACC-JARG-003
+lens: access
+category: jargon and acronyms
+severity: low
+match_type: phrase
+patterns:
+  - circle back
+  - touch base
+  - synergy
+  - synergies
+  - low-hanging fruit
+  - move the needle
+  - deep dive
+  - bandwidth to
+applies_to: [customer_service, education, communications]
+why: >
+  Office buzzwords sound vague to outsiders and are hard for second-language
+  readers, who may read them literally.
+who_is_affected: Customers, parents, and second-language readers
+suggestion: >
+  Say the plain action: 'follow up', 'check in', 'easy first steps',
+  'make progress', 'review in detail', 'time to'.
+source_title: Federal Plain Language Guidelines
+source_url: https://www.plainlanguage.gov/guidelines/
+examples:
+  should_flag:
+    - I will circle back with you next week.
+    - Let's touch base about your child's progress.
+  should_not_flag:
+    - I will follow up with you next week.
+    - The field trip includes a visit to the fruit market.

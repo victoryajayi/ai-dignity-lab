@@ -1,0 +1,31 @@
+id: ACC-NEG-001
+lens: access
+category: jargon and acronyms
+severity: low
+match_type: phrase
+patterns:
+  - not uncommon
+  - not unlike
+  - not unusual
+  - not unreasonable
+  - not ineligible
+  - not insignificant
+  - not unlikely
+  - not impossible
+applies_to: [all]
+why: >
+  Double negatives make the reader undo two 'nots' to find the meaning,
+  which is hard for second-language readers and people with cognitive
+  disabilities.
+who_is_affected: Second-language readers and people with cognitive disabilities
+suggestion: >
+  Say it positively: 'common', 'similar to', 'reasonable', 'eligible', 'likely'.
+source_title: Federal Plain Language Guidelines
+source_url: https://www.plainlanguage.gov/guidelines/
+examples:
+  should_flag:
+    - It is not uncommon for refunds to take a week.
+    - Students who miss one deadline are not ineligible.
+  should_not_flag:
+    - Refunds often take a week.
+    - Students who miss one deadline are still eligible.
