@@ -1,0 +1,33 @@
+id: RESP-DIS-002
+lens: respect
+category: disability language
+severity: medium
+match_type: regex
+patterns:
+  - '\b(?:suffers|suffering|suffered) from\b'
+  - '\bafflicted (?:with|by)\b'
+  - '\bhandicapped\b'
+  - '\bspecial needs\b'
+  - '\bthe disabled\b'
+applies_to: [all]
+why: >
+  These terms frame disability as tragedy or pity, or group people as
+  'the disabled' rather than as people. Many disabled people prefer plain,
+  neutral descriptions.
+who_is_affected: People with disabilities and their families
+suggestion: >
+  Say 'has [condition]', 'disabled people' or 'people with disabilities',
+  and 'accessible parking' or 'students with disabilities'.
+limitations: >
+  'Special needs' still appears in some legal and program names. 'Suffers
+  from' can describe illness the person says causes suffering. Check context.
+source_title: NCDJ Disability Language Style Guide
+source_url: https://ncdj.org/style-guide/
+examples:
+  should_flag:
+    - The student suffers from autism.
+    - Please use the handicapped entrance.
+    - Our program serves special needs children.
+  should_not_flag:
+    - The student is autistic and uses an AAC device.
+    - Please use the accessible entrance on Main Street.

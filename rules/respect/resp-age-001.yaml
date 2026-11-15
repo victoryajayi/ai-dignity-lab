@@ -1,0 +1,27 @@
+id: RESP-AGE-001
+lens: respect
+category: age and generation
+severity: low
+match_type: phrase
+patterns:
+  - the elderly
+  - elderly people
+  - the aged
+  - senior moment
+  - senior moments
+applies_to: [all]
+why: >
+  These terms lump older people into one group defined by decline.
+  'Senior moment' jokes about memory loss as a trait of age.
+who_is_affected: Older adults
+suggestion: >
+  Say 'older adults' or name the age range, for example 'adults 65 and older'.
+source_title: APA Inclusive Language Guide
+source_url: https://www.apa.org/about/apa/equity-diversity-inclusion/language-guidelines
+examples:
+  should_flag:
+    - The program serves the elderly in our community.
+    - Sorry, I had a senior moment.
+  should_not_flag:
+    - The program serves adults 65 and older.
+    - Our older adult volunteers lead the reading hour.

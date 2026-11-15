@@ -1,0 +1,30 @@
+id: RESP-MH-001
+lens: respect
+category: mental health
+severity: medium
+match_type: regex
+patterns:
+  - '\bcommitted suicide\b'
+  - '\bpsychos?\b'
+  - '\b(?:so|a little|kind of|totally) (?:OCD|bipolar|schizo)\b'
+applies_to: [all]
+why: >
+  'Committed suicide' frames a death as a crime, and using diagnoses as
+  casual adjectives ('so OCD') trivializes real conditions.
+who_is_affected: People with mental health conditions and families affected by suicide
+suggestion: >
+  Say 'died by suicide'. Describe the behavior instead of the diagnosis,
+  for example 'very organized' or 'changes plans often'.
+limitations: >
+  Clinical writing may use diagnostic terms correctly. Check that the term
+  is used casually, not clinically.
+source_title: APA Inclusive Language Guide
+source_url: https://www.apa.org/about/apa/equity-diversity-inclusion/language-guidelines
+examples:
+  should_flag:
+    - Her uncle committed suicide last year.
+    - I'm so OCD about my desk.
+    - That customer was a psycho.
+  should_not_flag:
+    - Her uncle died by suicide last year.
+    - The student has a diagnosis of OCD and an IEP.

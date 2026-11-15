@@ -1,0 +1,27 @@
+id: RESP-GEN-001
+lens: respect
+category: gender and family
+severity: low
+match_type: regex
+patterns:
+  - '\bmankind\b'
+  - '\bmanpower\b'
+  - '\bman-?hours?\b'
+  - '\bman (?:the|our) (?:desk|phone|phones|booth|table|front desk)\b'
+applies_to: [all]
+why: >
+  Using 'man' to mean all people or as the verb for staffing a post
+  treats men as the default and leaves others out.
+who_is_affected: Women and nonbinary people
+suggestion: >
+  Use 'humanity', 'staff' or 'workforce', 'work hours', or 'staff the desk'.
+source_title: Microsoft Writing Style Guide, Bias-free communication
+source_url: https://learn.microsoft.com/en-us/style-guide/bias-free-communication
+examples:
+  should_flag:
+    - This discovery changed mankind.
+    - We need volunteers to man the booth.
+    - The project took 200 man-hours.
+  should_not_flag:
+    - We need volunteers to staff the booth.
+    - The manager approved the schedule.

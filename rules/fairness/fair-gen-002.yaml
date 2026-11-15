@@ -1,0 +1,30 @@
+id: FAIR-GEN-002
+lens: fairness
+category: gender-coded language
+severity: medium
+match_type: phrase
+patterns:
+  - rockstar
+  - rock star
+  - ninja
+  - ninjas
+  - guru
+  - brogrammer
+applies_to: [hiring]
+why: >
+  Slang titles like 'rockstar' or 'ninja' read as masculine-coded and
+  signal a narrow team culture, which research links to fewer women
+  applying.
+who_is_affected: Women and nonbinary applicants
+suggestion: >
+  Use the real job title and describe the skill level, for example
+  'experienced software developer'.
+source_title: Gaucher, Friesen, and Kay (2011), via Gender Decoder
+source_url: https://gender-decoder.katmatfield.com/
+examples:
+  should_flag:
+    - We need a JavaScript ninja.
+    - Join us as our sales rockstar.
+  should_not_flag:
+    - We need an experienced JavaScript developer.
+    - Join us as a senior sales associate.

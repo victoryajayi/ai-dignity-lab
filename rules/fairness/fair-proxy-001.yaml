@@ -1,0 +1,31 @@
+id: FAIR-PROXY-001
+lens: fairness
+category: proxies and coded screens
+severity: medium
+match_type: phrase
+patterns:
+  - culture fit
+  - good fit for our culture
+  - clean-shaven
+  - clean shaven
+  - polished appearance
+  - professional appearance
+applies_to: [hiring]
+why: >
+  Vague screens like 'culture fit' or 'polished appearance' let personal
+  bias decide, and grooming rules such as 'clean-shaven' can exclude people
+  for religion or race-linked hair and skin conditions.
+who_is_affected: Religious minorities, Black applicants, and anyone outside the existing team's background
+suggestion: >
+  Name the actual behaviors or values, for example 'collaborates across
+  teams' or 'follows food safety dress code'.
+source_title: EEOC, Prohibited Employment Policies and Practices
+source_url: https://www.eeoc.gov/prohibited-employment-policies-practices
+examples:
+  should_flag:
+    - We are looking for a strong culture fit.
+    - Staff must be clean-shaven.
+    - A polished appearance is required.
+  should_not_flag:
+    - We value people who collaborate across teams.
+    - Staff follow the food safety dress code, including hair coverings.

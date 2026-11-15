@@ -1,0 +1,29 @@
+id: RESP-STER-001
+lens: respect
+category: stereotyped generalizations
+severity: high
+match_type: regex
+patterns:
+  - '\b(?:women|men|girls|boys|ladies|guys) are (?:naturally|just|always|better at|worse at|bad at|not good at|more emotional|less)\b'
+  - '\b(?:women|men|girls|boys) tend to be (?:more|less|better|worse)\b'
+applies_to: [all]
+why: >
+  Statements about what a whole gender 'naturally' is or does turn a
+  stereotype into a claim of fact and can steer people away from roles,
+  subjects, or opportunities.
+who_is_affected: Anyone the generalization describes, especially girls and women in STEM
+suggestion: >
+  Describe the individual or cite the data, for example 'many students
+  in this class enjoy coding'.
+limitations: >
+  v1 covers gender only. Generalizations about race, nationality, and
+  religion are a planned rule.
+source_title: APA Inclusive Language Guide
+source_url: https://www.apa.org/about/apa/equity-diversity-inclusion/language-guidelines
+examples:
+  should_flag:
+    - Women are naturally better at caring for children.
+    - Boys are just better at math.
+  should_not_flag:
+    - Many students in this class enjoy coding.
+    - Women are underrepresented in engineering, according to federal data.

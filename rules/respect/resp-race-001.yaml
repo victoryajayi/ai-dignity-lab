@@ -1,0 +1,26 @@
+id: RESP-RACE-001
+lens: respect
+category: race, ethnicity, and immigration
+severity: medium
+match_type: regex
+patterns:
+  - '\billegal (?:aliens?|immigrants?)\b'
+  - '\billegals\b'
+applies_to: [all]
+why: >
+  Calling a person 'illegal' labels the whole person as a crime. Major
+  style guides recommend describing a status, not the person.
+who_is_affected: Immigrants and their families
+suggestion: >
+  Use 'undocumented immigrant' or 'person without legal immigration status'.
+source_title: APA Inclusive Language Guide
+source_url: https://www.apa.org/about/apa/equity-diversity-inclusion/language-guidelines
+limitations: >
+  The phrase may appear in a quotation or a legal citation. Check context.
+examples:
+  should_flag:
+    - The article was about illegal aliens crossing the border.
+    - Many illegals work in agriculture.
+  should_not_flag:
+    - Undocumented immigrants make up part of the farm workforce.
+    - Parking in the fire lane is illegal.

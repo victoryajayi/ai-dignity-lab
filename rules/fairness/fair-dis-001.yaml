@@ -1,0 +1,30 @@
+id: FAIR-DIS-001
+lens: fairness
+category: disability and essential functions
+severity: medium
+match_type: regex
+patterns:
+  - '\bmust be able to (?:stand|walk|see|hear|speak)\b'
+  - '\bmust have (?:perfect|20/20|normal) (?:vision|hearing|eyesight)\b'
+applies_to: [hiring]
+why: >
+  Requirements written as body abilities ('must be able to stand') can
+  screen out disabled people who could do the task another way, with or
+  without a reasonable accommodation.
+who_is_affected: People with disabilities
+suggestion: >
+  Describe the task, not the body, for example 'remain at the service
+  counter for most of an 8-hour shift' or 'monitor the security camera
+  feed'. Add an accommodation statement to the posting.
+limitations: >
+  Some physical requirements are true essential functions. A person should
+  check whether the job really requires it and whether it is phrased as a task.
+source_title: EEOC, Disability Discrimination
+source_url: https://www.eeoc.gov/disability-discrimination
+examples:
+  should_flag:
+    - Candidates must be able to stand for eight hours.
+    - Applicants must have perfect vision.
+  should_not_flag:
+    - This role stays at the service counter for most of the shift.
+    - We provide reasonable accommodations to qualified applicants.

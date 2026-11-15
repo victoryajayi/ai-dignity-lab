@@ -1,0 +1,34 @@
+id: FAIR-CRIM-001
+lens: fairness
+category: criminal and credit history
+severity: medium
+match_type: phrase
+patterns:
+  - clean background
+  - clean criminal record
+  - no criminal record
+  - no criminal history
+  - no felonies
+  - no felons
+  - no convictions
+applies_to: [hiring]
+why: >
+  Blanket bans on any criminal record shut out people with old or
+  unrelated convictions, and fall hardest on Black and Latino applicants.
+  Many states and cities limit when and how employers can ask.
+who_is_affected: People with arrest or conviction records; Black and Latino applicants
+suggestion: >
+  Say a background check may be required and that records are reviewed
+  case by case against the duties of the job.
+limitations: >
+  Some roles have legal screening requirements, such as work with children.
+  Check the role and local law before changing the wording.
+source_title: EEOC, Enforcement Guidance on Arrest and Conviction Records
+source_url: https://www.eeoc.gov/laws/guidance/enforcement-guidance-consideration-arrest-and-conviction-records-employment-decisions
+examples:
+  should_flag:
+    - Clean background required.
+    - No felonies, no exceptions.
+  should_not_flag:
+    - A background check may be required, and records are reviewed case by case.
+    - Our cleaning team keeps the background music low in the lobby.
